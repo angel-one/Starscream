@@ -12,14 +12,15 @@ import Foundation
 public class NativeEngine: NSObject, Engine, URLSessionDataDelegate, URLSessionWebSocketDelegate {
     private var task: URLSessionWebSocketTask?
     weak var delegate: EngineDelegate?
+	weak var session: URLSession?
 
     public func register(delegate: EngineDelegate) {
         self.delegate = delegate
     }
 
     public func start(request: URLRequest) {
-        let session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
-        task = session.webSocketTask(with: request)
+		session = URLSession(configuration: URLSessionConfiguration.default, delegate: self, delegateQueue: nil)
+        task = session?.webSocketTask(with: request)
         doRead()
         task?.resume()
     }
@@ -94,4 +95,9 @@ public class NativeEngine: NSObject, Engine, URLSessionDataDelegate, URLSessionW
         }
         broadcast(event: .disconnected(r, UInt16(closeCode.rawValue)))
     }
+
+	public func invalidateSession() {
+		session?.invalidateAndCancel()
+	}
+
 }

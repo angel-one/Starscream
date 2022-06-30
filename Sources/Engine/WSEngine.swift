@@ -81,7 +81,11 @@ FrameCollectorDelegate, HTTPHandlerDelegate {
     public func forceStop() {
         transport.disconnect()
     }
-    
+
+	public func invalidateSession() {
+		///implement if needed
+	}
+
     public func write(string: String, completion: (() -> ())?) {
         let data = string.data(using: .utf8)!
         write(data: data, opcode: .textFrame, completion: completion)
