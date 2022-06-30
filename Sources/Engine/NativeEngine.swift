@@ -12,7 +12,7 @@ import Foundation
 public class NativeEngine: NSObject, Engine, URLSessionDataDelegate, URLSessionWebSocketDelegate {
     private var task: URLSessionWebSocketTask?
     weak var delegate: EngineDelegate?
-	weak var session: URLSession?
+	var session: URLSession?
 
     public func register(delegate: EngineDelegate) {
         self.delegate = delegate

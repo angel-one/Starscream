@@ -139,7 +139,6 @@ open class WebSocket: WebSocketClient, EngineDelegate {
     }
 
 	public func forceDisconnectAndInvalidateSession() {
-		engine.forceStop()
 		engine.invalidateSession()
 	}
 
