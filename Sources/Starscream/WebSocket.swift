@@ -137,6 +137,12 @@ open class WebSocket: WebSocketClient, EngineDelegate {
     public func forceDisconnect() {
         engine.forceStop()
     }
+
+	public func forceDisconnectAndInvalidateSession() {
+		engine.forceStop()
+		engine.invalidateSession()
+	}
+
     
     public func write(data: Data, completion: (() -> ())?) {
          write(data: data, opcode: .binaryFrame, completion: completion)
